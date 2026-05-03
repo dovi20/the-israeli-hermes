@@ -9,148 +9,170 @@
   <a href="https://discord.gg/NousResearch"><img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord"></a>
   <a href="https://github.com/NousResearch/hermes-agent/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License: MIT"></a>
   <a href="https://nousresearch.com"><img src="https://img.shields.io/badge/Built%20by-Nous%20Research-blueviolet?style=for-the-badge" alt="Built by Nous Research"></a>
+  <a href="README.en.md"><img src="https://img.shields.io/badge/🌐-English-lightgrey?style=for-the-badge" alt="English"></a>
 </p>
 
-**The self-improving AI agent built by [Nous Research](https://nousresearch.com).** It's the only agent with a built-in learning loop — it creates skills from experience, improves them during use, nudges itself to persist knowledge, searches its own past conversations, and builds a deepening model of who you are across sessions. Run it on a $5 VPS, a GPU cluster, or serverless infrastructure that costs nearly nothing when idle. It's not tied to your laptop — talk to it from Telegram while it works on a cloud VM.
+---
 
-Use any model you want — [Nous Portal](https://portal.nousresearch.com), [OpenRouter](https://openrouter.ai) (200+ models), [NVIDIA NIM](https://build.nvidia.com) (Nemotron), [Xiaomi MiMo](https://platform.xiaomimimo.com), [z.ai/GLM](https://z.ai), [Kimi/Moonshot](https://platform.moonshot.ai), [MiniMax](https://www.minimax.io), [Hugging Face](https://huggingface.co), OpenAI, or your own endpoint. Switch with `hermes model` — no code changes, no lock-in.
+## 🇮🇱 הגרסה הישראלית
+
+ה-fork הזה הוא **גרסה ישראלית** של [Hermes Agent](https://github.com/NousResearch/hermes-agent) המקורי של Nous Research.
+
+לקחנו את אל המסרים היווני, החלפנו לו את הטוגה בקפוצ'ון של ת"א, לימדנו אותו עברית, וביקשנו שלא יהיה מתחנף. עכשיו הוא חי איתנו 24/7 — בטלגרם, בדאשבורד, ובאמצע הלילה כשהוא מסיים פיצ'ר ושוכח שכבר 3:00.
+
+**מה שונה אצלנו:**
+- 🇮🇱 **עברית מלאה לדאשבורד** — תרגום של כל המחרוזות (460+ keys), כולל hardcoded strings שה-i18n המקורי החמיץ
+- ↔️ **תמיכת RTL מלאה** — ה-`<html dir="rtl">` מתעדכן אוטומטית לפי השפה הנבחרת. הסיידבר עובר ימינה, הטקסט מתהפך, אפילו ה-spinners יודעים את הצד הנכון
+- 🌐 **כפתור שפה תלת-מצבי**: 🇬🇧 EN → 🇨🇳 中文 → 🇮🇱 עב
+- 📖 **README בעברית** (אתה כאן). הגרסה האנגלית המלאה ב-[README.en.md](README.en.md)
+- 🛠️ **שיפורים ותוספות** שצוברים תוך שימוש יומיומי
+
+> **לסקרנים**: למה Hermes ולא, נגיד, אליהו הנביא? כי Hermes הוא אל המסרים, מתאים לסוכן שמדבר איתך מ-Telegram. אליהו עוד יכנס לפיצ'ר עתידי.
+
+---
+
+# Hermes Agent — תיעוד
+
+**הסוכן ה-AI הראשון עם לולאת למידה אמיתית, בנוי על ידי [Nous Research](https://nousresearch.com).** הסוכן היחיד עם לולאת למידה מובנית — הוא יוצר מיומנויות (skills) מניסיון, משפר אותן תוך כדי שימוש, מזכיר לעצמו לשמור ידע, מחפש בשיחות העבר שלו, ובונה מודל עמוק של מי אתה לאורך סשנים. תריץ אותו על VPS של $5, על cluster של GPU, או על תשתית serverless שעולה כמעט כלום כשהיא במנוחה. הוא לא קשור למחשב הנייד שלך — דבר איתו מ-Telegram בזמן שהוא עובד על VM בענן.
+
+תשתמש בכל מודל שתרצה — [Nous Portal](https://portal.nousresearch.com), [OpenRouter](https://openrouter.ai) (200+ מודלים), [NVIDIA NIM](https://build.nvidia.com) (Nemotron), [Xiaomi MiMo](https://platform.xiaomimimo.com), [z.ai/GLM](https://z.ai), [Kimi/Moonshot](https://platform.moonshot.ai), [MiniMax](https://www.minimax.io), [Hugging Face](https://huggingface.co), OpenAI, או endpoint משלך. החלפה ב-`hermes model` — בלי שינויי קוד, בלי lock-in.
 
 <table>
-<tr><td><b>A real terminal interface</b></td><td>Full TUI with multiline editing, slash-command autocomplete, conversation history, interrupt-and-redirect, and streaming tool output.</td></tr>
-<tr><td><b>Lives where you do</b></td><td>Telegram, Discord, Slack, WhatsApp, Signal, and CLI — all from a single gateway process. Voice memo transcription, cross-platform conversation continuity.</td></tr>
-<tr><td><b>A closed learning loop</b></td><td>Agent-curated memory with periodic nudges. Autonomous skill creation after complex tasks. Skills self-improve during use. FTS5 session search with LLM summarization for cross-session recall. <a href="https://github.com/plastic-labs/honcho">Honcho</a> dialectic user modeling. Compatible with the <a href="https://agentskills.io">agentskills.io</a> open standard.</td></tr>
-<tr><td><b>Scheduled automations</b></td><td>Built-in cron scheduler with delivery to any platform. Daily reports, nightly backups, weekly audits — all in natural language, running unattended.</td></tr>
-<tr><td><b>Delegates and parallelizes</b></td><td>Spawn isolated subagents for parallel workstreams. Write Python scripts that call tools via RPC, collapsing multi-step pipelines into zero-context-cost turns.</td></tr>
-<tr><td><b>Runs anywhere, not just your laptop</b></td><td>Six terminal backends — local, Docker, SSH, Daytona, Singularity, and Modal. Daytona and Modal offer serverless persistence — your agent's environment hibernates when idle and wakes on demand, costing nearly nothing between sessions. Run it on a $5 VPS or a GPU cluster.</td></tr>
-<tr><td><b>Research-ready</b></td><td>Batch trajectory generation, Atropos RL environments, trajectory compression for training the next generation of tool-calling models.</td></tr>
+<tr><td><b>ממשק טרמינל אמיתי</b></td><td>TUI מלא עם עריכה רב-שורתית, השלמה אוטומטית של slash commands, היסטוריית שיחה, interrupt-and-redirect, וזרימה חיה של פלט כלים.</td></tr>
+<tr><td><b>חי איפה שאתה</b></td><td>Telegram, Discord, Slack, WhatsApp, Signal, ו-CLI — הכל מתהליך gateway אחד. תמלול הודעות קוליות, המשכיות שיחה בין פלטפורמות.</td></tr>
+<tr><td><b>לולאת למידה סגורה</b></td><td>זיכרון מנוהל-סוכן עם תזכורות תקופתיות. יצירת skills אוטונומית אחרי משימות מורכבות. Skills משתפרים תוך כדי שימוש. חיפוש סשנים ב-FTS5 עם סיכומי LLM להחלמת מידע צולב-סשנים. מודל משתמש דיאלקטי של <a href="https://github.com/plastic-labs/honcho">Honcho</a>. תואם לסטנדרט הפתוח <a href="https://agentskills.io">agentskills.io</a>.</td></tr>
+<tr><td><b>אוטומציות מתוזמנות</b></td><td>Cron scheduler מובנה עם משלוח לכל פלטפורמה. דוחות יומיים, גיבויים בלילה, ביקורות שבועיות — הכל בשפה טבעית, רץ ללא השגחה.</td></tr>
+<tr><td><b>האצלה ומקביליות</b></td><td>שגר subagents מבודדים לזרימות עבודה מקבילות. כתוב סקריפטי Python שקוראים לכלים דרך RPC, שמכווצים pipelines של כמה צעדים לתורים בעלי עלות-קונטקסט אפסית.</td></tr>
+<tr><td><b>רץ בכל מקום, לא רק על הלפטופ שלך</b></td><td>שישה backends לטרמינל — local, Docker, SSH, Daytona, Singularity, ו-Modal. Daytona ו-Modal מציעים persistence serverless — סביבת הסוכן שלך נכנסת ל-hibernation כשהיא במנוחה ומתעוררת בדרישה, עולה כמעט כלום בין סשנים. תריץ על VPS של $5 או על cluster של GPU.</td></tr>
+<tr><td><b>מוכן למחקר</b></td><td>יצירת trajectories ב-batch, סביבות RL של Atropos, דחיסת trajectories לאימון הדור הבא של מודלים שיודעים לקרוא לכלים.</td></tr>
 </table>
 
 ---
 
-## Quick Install
+## התקנה מהירה
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash
 ```
 
-Works on Linux, macOS, WSL2, and Android via Termux. The installer handles the platform-specific setup for you.
+עובד על Linux, macOS, WSL2, ו-Android דרך Termux. ההתקנה מטפלת בהבדלים בין הפלטפורמות בשבילך.
 
-> **Android / Termux:** The tested manual path is documented in the [Termux guide](https://hermes-agent.nousresearch.com/docs/getting-started/termux). On Termux, Hermes installs a curated `.[termux]` extra because the full `.[all]` extra currently pulls Android-incompatible voice dependencies.
+> **Android / Termux:** הנתיב הידני שנבדק מתועד ב-[מדריך Termux](https://hermes-agent.nousresearch.com/docs/getting-started/termux). ב-Termux, Hermes מתקין `.[termux]` (extra מצומצם) כי `.[all]` המלא מושך תלויות קול שלא תואמות ל-Android.
 >
-> **Windows:** Native Windows is not supported. Please install [WSL2](https://learn.microsoft.com/en-us/windows/wsl/install) and run the command above.
+> **Windows:** Windows מקורי לא נתמך. תתקין [WSL2](https://learn.microsoft.com/en-us/windows/wsl/install) ותריץ את הפקודה למעלה.
 
-After installation:
+אחרי ההתקנה:
 
 ```bash
-source ~/.bashrc    # reload shell (or: source ~/.zshrc)
-hermes              # start chatting!
+source ~/.bashrc    # rerun shell (או: source ~/.zshrc)
+hermes              # התחל לדבר!
 ```
 
 ---
 
-## Getting Started
+## תחילת עבודה
 
 ```bash
-hermes              # Interactive CLI — start a conversation
-hermes model        # Choose your LLM provider and model
-hermes tools        # Configure which tools are enabled
-hermes config set   # Set individual config values
-hermes gateway      # Start the messaging gateway (Telegram, Discord, etc.)
-hermes setup        # Run the full setup wizard (configures everything at once)
-hermes claw migrate # Migrate from OpenClaw (if coming from OpenClaw)
-hermes update       # Update to the latest version
-hermes doctor       # Diagnose any issues
+hermes              # CLI אינטראקטיבי — התחל שיחה
+hermes model        # בחר ספק LLM ומודל
+hermes tools        # קבע אילו כלים מופעלים
+hermes config set   # קבע ערכי תצורה ספציפיים
+hermes gateway      # הפעל את ה-gateway למסרים (Telegram, Discord, וכו')
+hermes setup        # הרץ את אשף ההתקנה המלא (מגדיר הכל בבת אחת)
+hermes claw migrate # מעבר מ-OpenClaw (אם אתה מגיע מ-OpenClaw)
+hermes update       # עדכן לגרסה האחרונה
+hermes doctor       # אבחון בעיות
 ```
 
-📖 **[Full documentation →](https://hermes-agent.nousresearch.com/docs/)**
+📖 **[תיעוד מלא (אנגלית) →](https://hermes-agent.nousresearch.com/docs/)**
 
-## CLI vs Messaging Quick Reference
+## CLI מול Messaging — הפניה מהירה
 
-Hermes has two entry points: start the terminal UI with `hermes`, or run the gateway and talk to it from Telegram, Discord, Slack, WhatsApp, Signal, or Email. Once you're in a conversation, many slash commands are shared across both interfaces.
+ל-Hermes שתי נקודות כניסה: התחל את ה-TUI עם `hermes`, או הרץ את ה-gateway ודבר איתו מ-Telegram, Discord, Slack, WhatsApp, Signal, או Email. ברגע שאתה בתוך שיחה, רוב ה-slash commands משותפים בין הממשקים.
 
-| Action | CLI | Messaging platforms |
+| פעולה | CLI | פלטפורמות מסרים |
 |---------|-----|---------------------|
-| Start chatting | `hermes` | Run `hermes gateway setup` + `hermes gateway start`, then send the bot a message |
-| Start fresh conversation | `/new` or `/reset` | `/new` or `/reset` |
-| Change model | `/model [provider:model]` | `/model [provider:model]` |
-| Set a personality | `/personality [name]` | `/personality [name]` |
-| Retry or undo the last turn | `/retry`, `/undo` | `/retry`, `/undo` |
-| Compress context / check usage | `/compress`, `/usage`, `/insights [--days N]` | `/compress`, `/usage`, `/insights [days]` |
-| Browse skills | `/skills` or `/<skill-name>` | `/<skill-name>` |
-| Interrupt current work | `Ctrl+C` or send a new message | `/stop` or send a new message |
-| Platform-specific status | `/platforms` | `/status`, `/sethome` |
+| התחל שיחה | `hermes` | הרץ `hermes gateway setup` + `hermes gateway start`, ואז שלח לבוט הודעה |
+| התחל שיחה חדשה | `/new` או `/reset` | `/new` או `/reset` |
+| החלף מודל | `/model [provider:model]` | `/model [provider:model]` |
+| קבע אישיות | `/personality [name]` | `/personality [name]` |
+| נסה שוב או בטל את התור האחרון | `/retry`, `/undo` | `/retry`, `/undo` |
+| דחוס קונטקסט / בדוק שימוש | `/compress`, `/usage`, `/insights [--days N]` | `/compress`, `/usage`, `/insights [days]` |
+| עיין ב-skills | `/skills` או `/<skill-name>` | `/<skill-name>` |
+| הפסק עבודה נוכחית | `Ctrl+C` או שלח הודעה חדשה | `/stop` או שלח הודעה חדשה |
+| סטטוס לפי פלטפורמה | `/platforms` | `/status`, `/sethome` |
 
-For the full command lists, see the [CLI guide](https://hermes-agent.nousresearch.com/docs/user-guide/cli) and the [Messaging Gateway guide](https://hermes-agent.nousresearch.com/docs/user-guide/messaging).
+לרשימה מלאה של פקודות, ראה את [מדריך ה-CLI](https://hermes-agent.nousresearch.com/docs/user-guide/cli) ו-[מדריך ה-Messaging Gateway](https://hermes-agent.nousresearch.com/docs/user-guide/messaging).
 
 ---
 
-## Documentation
+## תיעוד
 
-All documentation lives at **[hermes-agent.nousresearch.com/docs](https://hermes-agent.nousresearch.com/docs/)**:
+כל התיעוד נמצא ב-**[hermes-agent.nousresearch.com/docs](https://hermes-agent.nousresearch.com/docs/)**:
 
-| Section | What's Covered |
+| מקטע | מה מכוסה |
 |---------|---------------|
-| [Quickstart](https://hermes-agent.nousresearch.com/docs/getting-started/quickstart) | Install → setup → first conversation in 2 minutes |
-| [CLI Usage](https://hermes-agent.nousresearch.com/docs/user-guide/cli) | Commands, keybindings, personalities, sessions |
-| [Configuration](https://hermes-agent.nousresearch.com/docs/user-guide/configuration) | Config file, providers, models, all options |
-| [Messaging Gateway](https://hermes-agent.nousresearch.com/docs/user-guide/messaging) | Telegram, Discord, Slack, WhatsApp, Signal, Home Assistant |
-| [Security](https://hermes-agent.nousresearch.com/docs/user-guide/security) | Command approval, DM pairing, container isolation |
-| [Tools & Toolsets](https://hermes-agent.nousresearch.com/docs/user-guide/features/tools) | 40+ tools, toolset system, terminal backends |
-| [Skills System](https://hermes-agent.nousresearch.com/docs/user-guide/features/skills) | Procedural memory, Skills Hub, creating skills |
-| [Memory](https://hermes-agent.nousresearch.com/docs/user-guide/features/memory) | Persistent memory, user profiles, best practices |
-| [MCP Integration](https://hermes-agent.nousresearch.com/docs/user-guide/features/mcp) | Connect any MCP server for extended capabilities |
-| [Cron Scheduling](https://hermes-agent.nousresearch.com/docs/user-guide/features/cron) | Scheduled tasks with platform delivery |
-| [Context Files](https://hermes-agent.nousresearch.com/docs/user-guide/features/context-files) | Project context that shapes every conversation |
-| [Architecture](https://hermes-agent.nousresearch.com/docs/developer-guide/architecture) | Project structure, agent loop, key classes |
-| [Contributing](https://hermes-agent.nousresearch.com/docs/developer-guide/contributing) | Development setup, PR process, code style |
-| [CLI Reference](https://hermes-agent.nousresearch.com/docs/reference/cli-commands) | All commands and flags |
-| [Environment Variables](https://hermes-agent.nousresearch.com/docs/reference/environment-variables) | Complete env var reference |
+| [Quickstart](https://hermes-agent.nousresearch.com/docs/getting-started/quickstart) | התקנה → setup → שיחה ראשונה ב-2 דקות |
+| [שימוש ב-CLI](https://hermes-agent.nousresearch.com/docs/user-guide/cli) | פקודות, keybindings, אישיויות, סשנים |
+| [תצורה](https://hermes-agent.nousresearch.com/docs/user-guide/configuration) | קובץ config, ספקים, מודלים, כל האפשרויות |
+| [Gateway למסרים](https://hermes-agent.nousresearch.com/docs/user-guide/messaging) | Telegram, Discord, Slack, WhatsApp, Signal, Home Assistant |
+| [אבטחה](https://hermes-agent.nousresearch.com/docs/user-guide/security) | אישור פקודות, DM pairing, בידוד containers |
+| [כלים ו-Toolsets](https://hermes-agent.nousresearch.com/docs/user-guide/features/tools) | 40+ כלים, מערכת toolsets, terminal backends |
+| [מערכת Skills](https://hermes-agent.nousresearch.com/docs/user-guide/features/skills) | זיכרון פרוצדורלי, Skills Hub, יצירת skills |
+| [זיכרון](https://hermes-agent.nousresearch.com/docs/user-guide/features/memory) | זיכרון מתמשך, פרופילי משתמש, best practices |
+| [אינטגרציית MCP](https://hermes-agent.nousresearch.com/docs/user-guide/features/mcp) | חבר כל MCP server ליכולות מורחבות |
+| [תזמון Cron](https://hermes-agent.nousresearch.com/docs/user-guide/features/cron) | משימות מתוזמנות עם משלוח לפלטפורמות |
+| [קבצי Context](https://hermes-agent.nousresearch.com/docs/user-guide/features/context-files) | קונטקסט פרויקט שמעצב כל שיחה |
+| [ארכיטקטורה](https://hermes-agent.nousresearch.com/docs/developer-guide/architecture) | מבנה הפרויקט, agent loop, מחלקות מפתח |
+| [תרומה](https://hermes-agent.nousresearch.com/docs/developer-guide/contributing) | סביבת פיתוח, תהליך PR, סגנון קוד |
+| [מקור CLI](https://hermes-agent.nousresearch.com/docs/reference/cli-commands) | כל הפקודות והדגלים |
+| [משתני סביבה](https://hermes-agent.nousresearch.com/docs/reference/environment-variables) | מקור משתני env מלא |
 
 ---
 
-## Migrating from OpenClaw
+## מעבר מ-OpenClaw
 
-If you're coming from OpenClaw, Hermes can automatically import your settings, memories, skills, and API keys.
+אם אתה מגיע מ-OpenClaw, Hermes יכול לייבא אוטומטית את ההגדרות, הזיכרון, ה-skills, וה-API keys שלך.
 
-**During first-time setup:** The setup wizard (`hermes setup`) automatically detects `~/.openclaw` and offers to migrate before configuration begins.
+**במהלך setup ראשון:** אשף ההתקנה (`hermes setup`) מזהה אוטומטית את `~/.openclaw` ומציע לעבור לפני שההגדרה מתחילה.
 
-**Anytime after install:**
+**בכל זמן אחרי ההתקנה:**
 
 ```bash
-hermes claw migrate              # Interactive migration (full preset)
-hermes claw migrate --dry-run    # Preview what would be migrated
-hermes claw migrate --preset user-data   # Migrate without secrets
-hermes claw migrate --overwrite  # Overwrite existing conflicts
+hermes claw migrate              # מעבר אינטראקטיבי (preset מלא)
+hermes claw migrate --dry-run    # תראה מה יועבר
+hermes claw migrate --preset user-data   # מעבר ללא סודות
+hermes claw migrate --overwrite  # דרוס התנגשויות קיימות
 ```
 
-What gets imported:
-- **SOUL.md** — persona file
-- **Memories** — MEMORY.md and USER.md entries
-- **Skills** — user-created skills → `~/.hermes/skills/openclaw-imports/`
-- **Command allowlist** — approval patterns
-- **Messaging settings** — platform configs, allowed users, working directory
-- **API keys** — allowlisted secrets (Telegram, OpenRouter, OpenAI, Anthropic, ElevenLabs)
-- **TTS assets** — workspace audio files
-- **Workspace instructions** — AGENTS.md (with `--workspace-target`)
+מה מיובא:
+- **SOUL.md** — קובץ אישיות
+- **זיכרונות** — ערכים מ-MEMORY.md ו-USER.md
+- **Skills** — skills שנוצרו על ידי המשתמש → `~/.hermes/skills/openclaw-imports/`
+- **Allowlist של פקודות** — תבניות אישור
+- **הגדרות messaging** — תצורות פלטפורמות, משתמשים מורשים, working directory
+- **API keys** — סודות ב-allowlist (Telegram, OpenRouter, OpenAI, Anthropic, ElevenLabs)
+- **קבצי TTS** — קבצי אודיו ב-workspace
+- **הוראות workspace** — AGENTS.md (עם `--workspace-target`)
 
-See `hermes claw migrate --help` for all options, or use the `openclaw-migration` skill for an interactive agent-guided migration with dry-run previews.
+ראה `hermes claw migrate --help` לכל האפשרויות, או השתמש ב-skill `openclaw-migration` למעבר אינטראקטיבי בהנחיית סוכן עם תצוגות dry-run.
 
 ---
 
-## Contributing
+## תרומה
 
-We welcome contributions! See the [Contributing Guide](https://hermes-agent.nousresearch.com/docs/developer-guide/contributing) for development setup, code style, and PR process.
+תרומות מתקבלות בברכה! ראה את [Contributing Guide](https://hermes-agent.nousresearch.com/docs/developer-guide/contributing) לסביבת פיתוח, סגנון קוד, ותהליך PR.
 
-Quick start for contributors — clone and go with `setup-hermes.sh`:
+התחלה מהירה לתורמים — clone והתחל עם `setup-hermes.sh`:
 
 ```bash
 git clone https://github.com/NousResearch/hermes-agent.git
 cd hermes-agent
-./setup-hermes.sh     # installs uv, creates venv, installs .[all], symlinks ~/.local/bin/hermes
-./hermes              # auto-detects the venv, no need to `source` first
+./setup-hermes.sh     # מתקין uv, יוצר venv, מתקין .[all], symlink ל-~/.local/bin/hermes
+./hermes              # מזהה את ה-venv אוטומטית, אין צורך לעשות `source` קודם
 ```
 
-Manual path (equivalent to the above):
+נתיב ידני (שווה ערך לעיל):
 
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -160,21 +182,21 @@ uv pip install -e ".[all,dev]"
 scripts/run_tests.sh
 ```
 
-> **RL Training (optional):** The RL/Atropos integration (`environments/`) ships via the `atroposlib` and `tinker` dependencies pulled in by `.[all,dev]` — no submodule setup required.
+> **אימון RL (אופציונלי):** האינטגרציה של RL/Atropos (`environments/`) מגיעה דרך התלויות `atroposlib` ו-`tinker` שנמשכות על ידי `.[all,dev]` — אין צורך ב-setup של submodule.
 
 ---
 
-## Community
+## קהילה
 
 - 💬 [Discord](https://discord.gg/NousResearch)
 - 📚 [Skills Hub](https://agentskills.io)
 - 🐛 [Issues](https://github.com/NousResearch/hermes-agent/issues)
-- 🔌 [HermesClaw](https://github.com/AaronWong1999/hermesclaw) — Community WeChat bridge: Run Hermes Agent and OpenClaw on the same WeChat account.
+- 🔌 [HermesClaw](https://github.com/AaronWong1999/hermesclaw) — גשר WeChat קהילתי: הרץ Hermes Agent ו-OpenClaw על אותו חשבון WeChat.
 
 ---
 
-## License
+## רישיון
 
-MIT — see [LICENSE](LICENSE).
+MIT — ראה [LICENSE](LICENSE).
 
-Built by [Nous Research](https://nousresearch.com).
+נבנה על ידי [Nous Research](https://nousresearch.com). הגרסה הישראלית הזו על ידי [@dovi20](https://github.com/dovi20) ☕.
