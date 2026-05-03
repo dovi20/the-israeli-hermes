@@ -4528,9 +4528,9 @@ class GatewayRunner:
                     if adapter:
                         await adapter.send(
                             source.chat_id,
-                            f"Hi~ I don't recognize you yet!\n\n"
-                            f"Here's your pairing code: `{code}`\n\n"
-                            f"Ask the bot owner to run:\n"
+                            f"היי~ אני לא מזהה אותך עדיין!\n\n"
+                            f"קוד השיוך שלך: `{code}`\n\n"
+                            f"בקש מבעל הבוט להריץ:\n"
                             f"`hermes pairing approve {platform_name} {code}`"
                         )
                 else:
@@ -4538,8 +4538,8 @@ class GatewayRunner:
                     if adapter:
                         await adapter.send(
                             source.chat_id,
-                            "Too many pairing requests right now~ "
-                            "Please try again later!"
+                            "יותר מדי בקשות שיוך כרגע~ "
+                            "אנא נסה שוב מאוחר יותר!"
                         )
                     # Record rate limit so subsequent messages are silently ignored
                     self.pairing_store._record_rate_limit(platform_name, source.user_id)
@@ -4749,7 +4749,7 @@ class GatewayRunner:
                     invalidation_reason="stop_command",
                 )
                 logger.info("STOP for session %s — agent interrupted, session lock released", _quick_key)
-                return EphemeralReply("⚡ Stopped. You can continue this session.")
+                return EphemeralReply("⚡ הופסק. תוכל להמשיך את הסשן.")
 
             # /reset and /new must bypass the running-agent guard so they
             # actually dispatch as commands instead of being queued as user
@@ -4777,7 +4777,7 @@ class GatewayRunner:
             if event.get_command() in ("queue", "q"):
                 queued_text = event.get_command_args().strip()
                 if not queued_text:
-                    return "Usage: /queue <prompt>"
+                    return "שימוש: /queue <prompt>"
                 adapter = self.adapters.get(source.platform)
                 if adapter:
                     queued_event = MessageEvent(
@@ -4790,8 +4790,8 @@ class GatewayRunner:
                     self._enqueue_fifo(_quick_key, queued_event, adapter)
                 depth = self._queue_depth(_quick_key, adapter=self.adapters.get(source.platform))
                 if depth <= 1:
-                    return "Queued for the next turn."
-                return f"Queued for the next turn. ({depth} queued)"
+                    return "הוסף לתור לתור הבא."
+                return f"הוסף לתור לתור הבא. ({depth} בתור)"
 
             # /steer <prompt> — inject mid-run after the next tool call.
             # Unlike /queue (turn boundary), /steer lands BETWEEN tool-call
@@ -4801,7 +4801,7 @@ class GatewayRunner:
             if _cmd_def_inner and _cmd_def_inner.name == "steer":
                 steer_text = event.get_command_args().strip()
                 if not steer_text:
-                    return "Usage: /steer <prompt>"
+                    return "שימוש: /steer <prompt>"
                 running_agent = self._running_agents.get(_quick_key)
                 if running_agent is _AGENT_PENDING_SENTINEL:
                     # Agent hasn't started yet — queue as turn-boundary fallback.
@@ -4815,17 +4815,17 @@ class GatewayRunner:
                             channel_prompt=event.channel_prompt,
                         )
                         adapter._pending_messages[_quick_key] = queued_event
-                    return "Agent still starting — /steer queued for the next turn."
+                    return "הסוכן עדיין מתחיל — /steer הוסף לתור הבא."
                 if running_agent and hasattr(running_agent, "steer"):
                     try:
                         accepted = running_agent.steer(steer_text)
                     except Exception as exc:
                         logger.warning("Steer failed for session %s: %s", _quick_key, exc)
-                        return f"⚠️ Steer failed: {exc}"
+                        return f"⚠️ /steer נכשל: {exc}"
                     if accepted:
                         preview = steer_text[:60] + ("..." if len(steer_text) > 60 else "")
-                        return f"⏩ Steer queued — arrives after the next tool call: '{preview}'"
-                    return "Steer rejected (empty payload)."
+                        return f"⏩ /steer בתור — יגיע אחרי קריאת הכלי הבאה: '{preview}'"
+                    return "/steer נדחה (תוכן ריק)."
                 # Running agent is missing or lacks steer() — fall back to queue.
                 adapter = self.adapters.get(source.platform)
                 if adapter:
@@ -4837,11 +4837,11 @@ class GatewayRunner:
                         channel_prompt=event.channel_prompt,
                     )
                     adapter._pending_messages[_quick_key] = queued_event
-                return "No active agent — /steer queued for the next turn."
+                return "אין סוכן פעיל — /steer הוסף לתור לתור הבא."
 
             # /model must not be used while the agent is running.
             if _cmd_def_inner and _cmd_def_inner.name == "model":
-                return "Agent is running — wait or /stop first, then switch models."
+                return "סוכן רץ — חכה או /stop קודם, ואז החלף מודלים."
 
             # /approve and /deny must bypass the running-agent interrupt path.
             # The agent thread is blocked on a threading.Event inside
@@ -5322,10 +5322,10 @@ class GatewayRunner:
                             source.platform.value if source.platform else "?",
                         )
                         return (
-                            f"Unknown command `/{command}`. "
-                            f"Type /commands to see what's available, "
-                            f"or resend without the leading slash to send "
-                            f"as a regular message."
+                            f"פקודה לא מוכרת `/{command}`. "
+                            f"הקלד /commands לראות מה זמין, "
+                            f"או שלח שוב בלי הקו הנטוי כדי לשלוח "
+                            f"כהודעה רגילה."
                         )
             except Exception as e:
                 logger.debug("Skill command check failed (non-fatal): %s", e)
@@ -5697,10 +5697,10 @@ class GatewayRunner:
                             duration = f"{hours}h" if not mins else f"{hours}h {mins}m" if hours else f"{mins}m"
                             reason_text = f"inactive for {duration}"
                         notice = (
-                            f"◐ Session automatically reset ({reason_text}). "
-                            f"Conversation history cleared.\n"
-                            f"Use /resume to browse and restore a previous session.\n"
-                            f"Adjust reset timing in config.yaml under session_reset."
+                            f"◐ הסשן אופס אוטומטית ({reason_text}). "
+                            f"היסטוריית השיחה נמחקה.\n"
+                            f"השתמש ב-/resume כדי לעיין בסשנים קודמים ולשחזר אותם.\n"
+                            f"כוון את תזמון האיפוס ב-config.yaml תחת session_reset."
                         )
                         try:
                             session_info = self._format_session_info()
@@ -6759,11 +6759,11 @@ class GatewayRunner:
             session_info = ""
 
         if new_entry:
-            header = "✨ Session reset! Starting fresh."
+            header = "✨ הסשן אופס! מתחילים מחדש."
         else:
             # No existing session, just create one
             new_entry = self.session_store.get_or_create_session(source, force_new=True)
-            header = "✨ New session started!"
+            header = "✨ סשן חדש התחיל!"
 
         # Fire plugin on_session_reset hook (new session guaranteed to exist)
         try:
@@ -6794,8 +6794,8 @@ class GatewayRunner:
         profile_name = get_active_profile_name()
 
         lines = [
-            f"👤 **Profile:** `{profile_name}`",
-            f"📂 **Home:** `{display}`",
+            f"👤 **פרופיל:** `{profile_name}`",
+            f"📂 **בית:** `{display}`",
         ]
 
         return "\n".join(lines)
@@ -7148,7 +7148,7 @@ class GatewayRunner:
             self.request_restart(detached=True, via_service=False)
         if active_agents:
             return f"⏳ Draining {active_agents} active agent(s) before restart..."
-        return EphemeralReply("♻ Restarting gateway. If you aren't notified within 60 seconds, restart from the console with `hermes gateway restart`.")
+        return EphemeralReply("♻ מאתחל את ה-gateway. אם לא תקבל הודעה בתוך 60 שניות, אתחל מהקונסול עם `hermes gateway restart`.")
 
     def _is_stale_restart_redelivery(self, event: MessageEvent) -> bool:
         """Return True if this /restart is a Telegram re-delivery we already handled.
@@ -7231,7 +7231,7 @@ class GatewayRunner:
             try:
                 requested_page = int(raw_args)
             except ValueError:
-                return "Usage: `/commands [page]`"
+                return "שימוש: `/commands [page]`"
         else:
             requested_page = 1
 
@@ -7649,7 +7649,7 @@ class GatewayRunner:
             personalities = {}
 
         if not personalities:
-            return f"No personalities configured in `{display_hermes_home()}/config.yaml`"
+            return f"לא הוגדרו אישיויות ב-`{display_hermes_home()}/config.yaml`"
 
         if not args:
             lines = ["🎭 **Available Personalities**\n"]
@@ -7682,7 +7682,7 @@ class GatewayRunner:
             except Exception as e:
                 return f"⚠️ Failed to save personality change: {e}"
             self._ephemeral_system_prompt = ""
-            return "🎭 Personality cleared — using base agent behavior.\n_(takes effect on next message)_"
+            return "🎭 האישיות נמחקה — משתמש בהתנהגות הסוכן הבסיסית.\n_(ייכנס לתוקף בהודעה הבאה)_"
         elif args in personalities:
             new_prompt = _resolve_prompt(personalities[args])
 
@@ -7698,10 +7698,10 @@ class GatewayRunner:
             # Update in-memory so it takes effect on the very next message.
             self._ephemeral_system_prompt = new_prompt
 
-            return f"🎭 Personality set to **{args}**\n_(takes effect on next message)_"
+            return f"🎭 האישיות הוגדרה ל-**{args}**\n_(ייכנס לתוקף בהודעה הבאה)_"
 
         available = "`none`, " + ", ".join(f"`{n}`" for n in personalities)
-        return f"Unknown personality: `{args}`\n\nAvailable: {available}"
+        return f"אישיות לא מוכרת: `{args}`\n\nזמינות: {available}"
 
     async def _handle_retry_command(self, event: MessageEvent) -> str:
         """Handle /retry command - re-send the last user message."""
@@ -7817,7 +7817,7 @@ class GatewayRunner:
         try:
             state = mgr.set(args)
         except ValueError as exc:
-            return f"Invalid goal: {exc}"
+            return f"מטרה לא חוקית: {exc}"
 
         # Queue the goal text as an immediate first turn so the agent
         # starts making progress. The post-turn hook takes over after.
@@ -7966,7 +7966,7 @@ class GatewayRunner:
         session_entry.last_prompt_tokens = 0
         
         preview = removed_msg[:40] + "..." if len(removed_msg) > 40 else removed_msg
-        return f"↩️ Undid {removed_count} message(s).\nRemoved: \"{preview}\""
+        return f"↩️ בוטלו {removed_count} הודעות.\nהוסר: \"{preview}\""
 
     async def _handle_set_home_command(self, event: MessageEvent) -> str:
         """Handle /sethome command -- set the current chat as the platform's home channel."""
@@ -8522,7 +8522,7 @@ class GatewayRunner:
         _task.add_done_callback(self._background_tasks.discard)
 
         preview = prompt[:60] + ("..." if len(prompt) > 60 else "")
-        return f'🔄 Background task started: "{preview}"\nTask ID: {task_id}\nYou can keep chatting — results will appear when done.'
+        return f'🔄 משימת רקע התחילה: "{preview}"\nמזהה: {task_id}\nתוכל להמשיך לדבר — התוצאות יופיעו כשיסיים.'
 
     async def _run_background_task(
         self, prompt: str, source: "SessionSource", task_id: str
@@ -8795,7 +8795,7 @@ class GatewayRunner:
         user_config = _load_gateway_config()
         model = _resolve_gateway_model(user_config)
         if not model_supports_fast_mode(model):
-            return "⚡ /fast is only available for OpenAI models that support Priority Processing."
+            return "⚡ /fast זמין רק למודלי OpenAI שתומכים ב-Priority Processing."
 
         def _save_config_key(key_path: str, value):
             """Save a dot-separated key to config.yaml."""
@@ -8980,7 +8980,7 @@ class GatewayRunner:
         elif arg == "":
             new_state = not effective["enabled"]
         else:
-            return "Usage: `/footer [on|off|status]`"
+            return "שימוש: `/footer [on|off|status]`"
 
         # --- write global flag ---------------------------------------------
         try:
@@ -9141,7 +9141,7 @@ class GatewayRunner:
             return "\n".join(lines)
         except Exception as e:
             logger.warning("Manual compress failed: %s", e)
-            return f"Compression failed: {e}"
+            return f"דחיסה נכשלה: {e}"
 
     async def _handle_title_command(self, event: MessageEvent) -> str:
         """Handle /title command — set or show the current session's title."""
@@ -9187,9 +9187,9 @@ class GatewayRunner:
             # Show the current title and session ID
             title = self._session_db.get_session_title(session_id)
             if title:
-                return f"📌 Session: `{session_id}`\nTitle: **{title}**"
+                return f"📌 סשן: `{session_id}`\nכותרת: **{title}**"
             else:
-                return f"📌 Session: `{session_id}`\nNo title set. Usage: `/title My Session Name`"
+                return f"📌 סשן: `{session_id}`\nלא הוגדרה כותרת. שימוש: `/title שם הסשן שלי`"
 
     async def _handle_resume_command(self, event: MessageEvent) -> str:
         """Handle /resume command — switch to a previously-named session."""
@@ -9243,7 +9243,7 @@ class GatewayRunner:
         # Check if already on that session
         current_entry = self.session_store.get_or_create_session(source)
         if current_entry.session_id == target_id:
-            return f"📌 Already on session **{name}**."
+            return f"📌 כבר בסשן **{name}**."
 
         # Clear any running agent for this session key
         self._release_running_agent_state(session_key)
@@ -9269,7 +9269,7 @@ class GatewayRunner:
         msg_count = len([m for m in history if m.get("role") == "user"]) if history else 0
         msg_part = f" ({msg_count} message{'s' if msg_count != 1 else ''})" if msg_count else ""
 
-        return f"↻ Resumed session **{title}**{msg_part}. Conversation restored."
+        return f"↻ הסשן **{title}** ממשיך{msg_part}. השיחה שוחזרה."
 
     async def _handle_branch_command(self, event: MessageEvent) -> str:
         """Handle /branch [name] — fork the current session into a new independent copy.
@@ -9943,10 +9943,10 @@ class GatewayRunner:
 
         if any(a in ("always", "permanent", "permanently") for a in remaining):
             choice = "always"
-            scope_msg = " (pattern approved permanently)"
+            scope_msg = " (התבנית אושרה לצמיתות)"
         elif any(a in ("session", "ses") for a in remaining):
             choice = "session"
-            scope_msg = " (pattern approved for this session)"
+            scope_msg = " (התבנית אושרה לסשן זה)"
         else:
             choice = "once"
             scope_msg = ""
@@ -9962,7 +9962,7 @@ class GatewayRunner:
 
         count_msg = f" ({count} commands)" if count > 1 else ""
         logger.info("User approved %d dangerous command(s) via /approve%s", count, scope_msg)
-        return f"✅ Command{'s' if count > 1 else ''} approved{scope_msg}{count_msg}. The agent is resuming..."
+        return f"✅ {'הפקודות אושרו' if count > 1 else 'הפקודה אושרה'}{scope_msg}{count_msg}. הסוכן ממשיך..."
 
     async def _handle_deny_command(self, event: MessageEvent) -> str:
         """Handle /deny command — reject pending dangerous command(s).
