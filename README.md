@@ -1,14 +1,18 @@
 <p align="center">
-  <img src="assets/banner.png" alt="Hermes Agent" width="100%">
+  <img src="assets/banner.png" alt="The Israeli Hermes" width="100%">
 </p>
 
-# Hermes Agent ☤
+# The Israeli Hermes ☤ 🇮🇱
 
 <p align="center">
+  <em>פורק ישראלי של Hermes Agent — עברית מלאה, RTL, וקצת חוצפה.</em>
+</p>
+
+<p align="center">
+  <a href="https://github.com/dovi20/the-israeli-hermes"><img src="https://img.shields.io/badge/🇮🇱-The%20Israeli%20Hermes-0038B8?style=for-the-badge" alt="The Israeli Hermes"></a>
+  <a href="https://github.com/NousResearch/hermes-agent"><img src="https://img.shields.io/badge/Upstream-NousResearch%2Fhermes--agent-FFD700?style=for-the-badge" alt="Upstream"></a>
   <a href="https://hermes-agent.nousresearch.com/docs/"><img src="https://img.shields.io/badge/Docs-hermes--agent.nousresearch.com-FFD700?style=for-the-badge" alt="Documentation"></a>
-  <a href="https://discord.gg/NousResearch"><img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord"></a>
-  <a href="https://github.com/NousResearch/hermes-agent/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License: MIT"></a>
-  <a href="https://nousresearch.com"><img src="https://img.shields.io/badge/Built%20by-Nous%20Research-blueviolet?style=for-the-badge" alt="Built by Nous Research"></a>
+  <a href="https://github.com/dovi20/the-israeli-hermes/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License: MIT"></a>
   <a href="README.en.md"><img src="https://img.shields.io/badge/🌐-English-lightgrey?style=for-the-badge" alt="English"></a>
 </p>
 
@@ -16,7 +20,7 @@
 
 ## 🇮🇱 הגרסה הישראלית
 
-ה-fork הזה הוא **גרסה ישראלית** של [Hermes Agent](https://github.com/NousResearch/hermes-agent) המקורי של Nous Research.
+זה **The Israeli Hermes** — fork ישראלי של [Hermes Agent](https://github.com/NousResearch/hermes-agent) המקורי של Nous Research.
 
 לקחנו את אל המסרים היווני, החלפנו לו את הטוגה בקפוצ'ון של ת"א, לימדנו אותו עברית, וביקשנו שלא יהיה מתחנף. עכשיו הוא חי איתנו 24/7 — בטלגרם, בדאשבורד, ובאמצע הלילה כשהוא מסיים פיצ'ר ושוכח שכבר 3:00.
 
@@ -24,10 +28,13 @@
 - 🇮🇱 **עברית מלאה לדאשבורד** — תרגום של כל המחרוזות (460+ keys), כולל hardcoded strings שה-i18n המקורי החמיץ
 - ↔️ **תמיכת RTL מלאה** — ה-`<html dir="rtl">` מתעדכן אוטומטית לפי השפה הנבחרת. הסיידבר עובר ימינה, הטקסט מתהפך, אפילו ה-spinners יודעים את הצד הנכון
 - 🌐 **כפתור שפה תלת-מצבי**: 🇬🇧 EN → 🇨🇳 中文 → 🇮🇱 עב
+- 📱 **תפריט Telegram + הודעות מערכת בעברית** — 61 פקודות סלאש ועוד ~50 הודעות מערכת תורגמו (`/help`, `/new`, אישורים, שגיאות, pairing, וכו')
 - 📖 **README בעברית** (אתה כאן). הגרסה האנגלית המלאה ב-[README.en.md](README.en.md)
 - 🛠️ **שיפורים ותוספות** שצוברים תוך שימוש יומיומי
 
 > **לסקרנים**: למה Hermes ולא, נגיד, אליהו הנביא? כי Hermes הוא אל המסרים, מתאים לסוכן שמדבר איתך מ-Telegram. אליהו עוד יכנס לפיצ'ר עתידי.
+
+> **טכני**: ה-Python package נשאר `hermes-agent` ופקודת ה-CLI נשארת `hermes` כדי לא לשבור התקנה ו-merges מ-upstream. רק המיתוג והשפה השתנו.
 
 ---
 
