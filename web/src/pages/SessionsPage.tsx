@@ -353,7 +353,7 @@ function SessionRow({
 
         <div className="flex items-center gap-2 shrink-0">
           <Badge tone="outline" className="text-[10px]">
-            {session.source ?? "local"}
+            {session.source ?? t.sessions.sourceLocal}
           </Badge>
           {resumeInChatEnabled && (
             <Button

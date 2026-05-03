@@ -149,12 +149,65 @@ export interface Translations {
     resumeInChat: string;
     previousPage: string;
     nextPage: string;
+    sourceLocal: string;
     roles: {
       user: string;
       assistant: string;
       system: string;
       tool: string;
     };
+  };
+
+  // ── Chat page ──
+  chat: {
+    sessionTokenUnavailable: string;
+    authFailed: string;
+    localhostOnly: string;
+  };
+
+  // ── Chat sidebar (model + tools panel) ──
+  chatSidebar: {
+    modelLabel: string;
+    toolsLabel: string;
+    switchModelTooltip: string;
+    noToolCalls: string;
+  };
+
+  // ── Model picker dialog ──
+  modelPicker: {
+    switchModel: string;
+    filterPlaceholder: string;
+    savesGlobalNote: string;
+    persistGlobally: string;
+    switch: string;
+    noAuthProviders: string;
+    modelsLabel: string;
+    pickProvider: string;
+    noModelsMatch: string;
+    noModelsForProvider: string;
+    current: string;
+  };
+
+  // ── Model info card ──
+  modelInfo: {
+    loading: string;
+    contextWindow: string;
+    overrideNote: string;
+    autoDetected: string;
+    maxOutput: string;
+    toolsCapability: string;
+    visionCapability: string;
+    reasoningCapability: string;
+  };
+
+  // ── Tool call (assistant tool invocation display) ──
+  toolCall: {
+    running: string;
+    done: string;
+    context: string;
+    streaming: string;
+    diff: string;
+    result: string;
   };
 
   // ── Analytics page ──

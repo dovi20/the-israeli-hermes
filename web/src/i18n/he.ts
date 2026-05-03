@@ -142,12 +142,61 @@ export const he: Translations = {
     resumeInChat: "המשך בצ'אט",
     previousPage: "עמוד קודם",
     nextPage: "עמוד הבא",
+    sourceLocal: "מקומי",
     roles: {
       user: "משתמש",
       assistant: "עוזר",
       system: "מערכת",
       tool: "כלי",
     },
+  },
+
+  chat: {
+    sessionTokenUnavailable:
+      "טוקן הסשן לא זמין. פתח דף זה דרך `hermes dashboard`, לא ישירות.",
+    authFailed: "האימות נכשל. רענן את הדף כדי לרענן את טוקן הסשן.",
+    localhostOnly: "הצ'אט נגיש רק מ-localhost.",
+  },
+
+  chatSidebar: {
+    modelLabel: "מודל",
+    toolsLabel: "כלים",
+    switchModelTooltip: "החלף מודל",
+    noToolCalls: "עדיין אין קריאות לכלים",
+  },
+
+  modelPicker: {
+    switchModel: "החלפת מודל",
+    filterPlaceholder: "סנן ספקים ומודלים…",
+    savesGlobalNote: "נשמר ל-config.yaml — חל על סשנים חדשים.",
+    persistGlobally: "שמור גלובלית (אחרת רק בסשן זה)",
+    switch: "החלף",
+    noAuthProviders: "אין ספקים מאומתים",
+    modelsLabel: "מודלים",
+    pickProvider: "בחר ספק →",
+    noModelsMatch: "אין מודלים שמתאימים למסנן",
+    noModelsForProvider: "לא רשומים מודלים עבור ספק זה",
+    current: "נוכחי",
+  },
+
+  modelInfo: {
+    loading: "טוען מידע על המודל…",
+    contextWindow: "חלון קונטקסט",
+    overrideNote: "(עקיפה — אוטומטי: {count})",
+    autoDetected: "זוהה אוטומטית",
+    maxOutput: "פלט מרבי",
+    toolsCapability: "כלים",
+    visionCapability: "ראייה",
+    reasoningCapability: "חשיבה",
+  },
+
+  toolCall: {
+    running: "פועל",
+    done: "הסתיים",
+    context: "קונטקסט",
+    streaming: "זרימה",
+    diff: "השוואה",
+    result: "תוצאה",
   },
 
   analytics: {

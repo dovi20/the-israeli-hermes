@@ -140,12 +140,61 @@ export const zh: Translations = {
     resumeInChat: "在对话中继续",
     previousPage: "上一页",
     nextPage: "下一页",
+    sourceLocal: "本地",
     roles: {
       user: "用户",
       assistant: "助手",
       system: "系统",
       tool: "工具",
     },
+  },
+
+  chat: {
+    sessionTokenUnavailable:
+      "会话令牌不可用。请通过 `hermes dashboard` 打开此页面，而非直接访问。",
+    authFailed: "认证失败。请重新加载页面以刷新会话令牌。",
+    localhostOnly: "聊天仅可从 localhost 访问。",
+  },
+
+  chatSidebar: {
+    modelLabel: "模型",
+    toolsLabel: "工具",
+    switchModelTooltip: "切换模型",
+    noToolCalls: "暂无工具调用",
+  },
+
+  modelPicker: {
+    switchModel: "切换模型",
+    filterPlaceholder: "筛选提供商和模型…",
+    savesGlobalNote: "保存到 config.yaml — 适用于新会话。",
+    persistGlobally: "全局保存（否则仅当前会话）",
+    switch: "切换",
+    noAuthProviders: "没有已认证的提供商",
+    modelsLabel: "模型",
+    pickProvider: "选择提供商 →",
+    noModelsMatch: "没有匹配筛选的模型",
+    noModelsForProvider: "此提供商没有列出的模型",
+    current: "当前",
+  },
+
+  modelInfo: {
+    loading: "正在加载模型信息…",
+    contextWindow: "上下文窗口",
+    overrideNote: "（覆盖 — 自动：{count}）",
+    autoDetected: "自动检测",
+    maxOutput: "最大输出",
+    toolsCapability: "工具",
+    visionCapability: "视觉",
+    reasoningCapability: "推理",
+  },
+
+  toolCall: {
+    running: "运行中",
+    done: "完成",
+    context: "上下文",
+    streaming: "流式",
+    diff: "差异",
+    result: "结果",
   },
 
   analytics: {

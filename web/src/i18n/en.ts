@@ -142,12 +142,61 @@ export const en: Translations = {
     resumeInChat: "Resume in Chat",
     previousPage: "Previous page",
     nextPage: "Next page",
+    sourceLocal: "local",
     roles: {
       user: "User",
       assistant: "Assistant",
       system: "System",
       tool: "Tool",
     },
+  },
+
+  chat: {
+    sessionTokenUnavailable:
+      "Session token unavailable. Open this page through `hermes dashboard`, not directly.",
+    authFailed: "Auth failed. Reload the page to refresh the session token.",
+    localhostOnly: "Chat is only reachable from localhost.",
+  },
+
+  chatSidebar: {
+    modelLabel: "model",
+    toolsLabel: "tools",
+    switchModelTooltip: "switch model",
+    noToolCalls: "no tool calls yet",
+  },
+
+  modelPicker: {
+    switchModel: "Switch Model",
+    filterPlaceholder: "Filter providers and models…",
+    savesGlobalNote: "Saves to config.yaml — applies to new sessions.",
+    persistGlobally: "Persist globally (otherwise this session only)",
+    switch: "Switch",
+    noAuthProviders: "no authenticated providers",
+    modelsLabel: "models",
+    pickProvider: "pick a provider →",
+    noModelsMatch: "no models match your filter",
+    noModelsForProvider: "no models listed for this provider",
+    current: "current",
+  },
+
+  modelInfo: {
+    loading: "Loading model info…",
+    contextWindow: "Context Window",
+    overrideNote: "(override — auto: {count})",
+    autoDetected: "auto-detected",
+    maxOutput: "Max Output",
+    toolsCapability: "Tools",
+    visionCapability: "Vision",
+    reasoningCapability: "Reasoning",
+  },
+
+  toolCall: {
+    running: "running",
+    done: "done",
+    context: "context",
+    streaming: "streaming",
+    diff: "diff",
+    result: "result",
   },
 
   analytics: {
